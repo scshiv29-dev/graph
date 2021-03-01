@@ -1,0 +1,13 @@
+
+    def clear_path(self,path):
+        res=[]
+        for i in path:
+            if i not in res:
+                res.append(i)
+        return  res
+
+    def clear_temp(self,p):
+        for i in self.not_found:
+            if i in p:
+                p.remove(i)
+        return p
