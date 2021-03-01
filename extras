@@ -1,5 +1,4 @@
-
-    def clear_path(self,path):
+   def clear_path(self,path):
         res=[]
         for i in path:
             if i not in res:

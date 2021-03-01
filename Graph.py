@@ -8,7 +8,6 @@ class Graph:
         self.labeldict = {}
         self.V = vertices
         self.graph = []
-        self.path = []
         self.not_found=[]
         for i in range(self.V):
             self.labeldict[i] = i
@@ -25,8 +24,6 @@ class Graph:
         self.path.append(src)
         found = False
         if self.graph[src][dst] == 1:
-            #self.path.append(dst)
-
             found = True
         if not found:
             temp = []
@@ -37,17 +34,14 @@ class Graph:
             # print(temp)
             if temp is not None:
                 for t in temp:
-                    print(t)
-                    print(temp)
                     if self.graph[t][dst] == 1:
                         found = True
-                        #self.path.append(t)
+
 
                         break
                     else:
                         for i in range(self.V):
                             if self.graph[t][i] == 1:
-                            # self.path.append(t)
                                 temp.append(i)
 
         if found:
@@ -67,6 +61,8 @@ class Graph:
         G = nx.from_numpy_matrix(G2, create_using=alg)
         nx.draw_circular(G, labels=self.labeldict, with_labels=True)
         plt.show()
+
+
 g=Graph(8)
 g.add_edge(0,3)
 g.add_edge(3,5)
