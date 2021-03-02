@@ -4,14 +4,11 @@ import matplotlib.pyplot as plt
 
 
 class Graph:
-    # initializing the class with no of vertices
     def __init__(self, vertices):
-        # declaring labeldict for labeling of graph
         self.labeldict = {}
-        # initializing vertices
         self.V = vertices
-        # initializing graph with all values to 0
         self.graph = []
+        self.not_found=[]
         for i in range(self.V):
             self.labeldict[i] = i
             l = []
@@ -20,10 +17,9 @@ class Graph:
             self.graph.append(l)
 
     def add_edge(self, src, dst):
-        # adding path i.e 1 from src to dst
         self.graph[src][dst] = 1
 
-    # checking for simple path
+
     def check_simple_path(self, src, dst):
 
         found = False
@@ -35,12 +31,13 @@ class Graph:
                 if self.graph[src][i] == 1:
                     temp.append(i)
 
+            # print(temp)
             if temp is not None:
                 for t in temp:
-                    # print(t)
-                    # print(temp)
                     if self.graph[t][dst] == 1:
                         found = True
+
+
                         break
                     else:
                         for i in range(self.V):
@@ -48,17 +45,15 @@ class Graph:
                                 temp.append(i)
 
         if found:
-            print(f"There is a simple path from {src} to {dst}")
+
+            print("There is a path")
 
         else:
-            print(f"No path found from {src} to {dst} ")
-
-    # printing matrix format of graph
+            print("No path found")
 
     def print_graph(self):
-        print(np.matrix(self.graph))
 
-    # drawing graph using matplotlib and networkx
+        print(np.matrix(self.graph))
 
     def draw_graph(self):
         alg = nx.DiGraph
@@ -68,25 +63,21 @@ class Graph:
         plt.show()
 
 
-n = int(input("Enter no of vertices in Graph   "))
-g = Graph(n)
-while True:
-    ch = int(input("1. Add an Edge   \n 2.Check if path exists   \n 3.Print Graph Matrix   \n4.Show Graph  \n5.quit \n"))
-    if ch == 1:
-        s = int(input("Enter Source Vertex "))
-        d = int(input("Enter Destination Vertex "))
-        g.add_edge(s, d)
-    elif ch == 2:
-        s = int(input("Enter Source Vertex "))
-        d = int(input("Enter Destination Vertex "))
-        g.check_simple_path(s, d)
-    elif ch == 3:
-        g.print_graph()
-    elif ch == 4:
-        g.draw_graph()
-    elif ch == 5:
-        quit()
+g=Graph(8)
+g.add_edge(0,3)
+g.add_edge(3,5)
+g.add_edge(5,6)
+g.add_edge(6,7)
+g.add_edge(3,4)
+g.add_edge(4,3)
+g.add_edge(1,0)
+g.add_edge(1,2)
+g.add_edge(1,4)
+g.add_edge(4,6)
+g.add_edge(2,7)
+g.add_edge(7,1)
+g.check_simple_path(0,1)
+g.check_simple_path(1,5)
 
-
-
-
+g.print_graph()
+g.draw_graph()
